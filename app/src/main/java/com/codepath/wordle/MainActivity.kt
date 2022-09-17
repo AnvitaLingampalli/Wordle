@@ -3,6 +3,7 @@ package com.codepath.wordle
 //import android.R
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -29,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         val guess2Check = findViewById<TextView>(R.id.guessTwoCheck)
         val guess3 = findViewById<TextView>(R.id.guessThree)
         val guess3Check = findViewById<TextView>(R.id.guessThreeCheck)
+        actual.text = wordToGuess
 
 
 
@@ -43,21 +45,19 @@ class MainActivity : AppCompatActivity() {
                 guess1.text = playerGuess
                 res = checkGuess(playerGuess)
                 guess1Check.text = res
-
-                actual.text = wordToGuess //THIS IS ACTUAL WORD
             }
             if(counter == 2) {
                 guess2.text = playerGuess
                 res = checkGuess(playerGuess)
                 guess2Check.text = res
-                //actual.text = original //THIS IS ACTUAL WORD
             }
 
             if(counter == 3) {
+                button.isEnabled = false
+                actual.visibility = View.VISIBLE
                 guess3.text = playerGuess
                 res = checkGuess(playerGuess)
                 guess3Check.text = res
-                //actual.text = original //THIS IS ACTUAL WORD
             }
 
 
@@ -66,9 +66,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkGuess(guess: String) : String {
-        val dummy = findViewById<TextView>(R.id.textView8) //del later
         var result = ""
-        dummy.text = guess //del later
         for (i in 0..3) {
             if (guess[i] == wordToGuess[i]) {
                 result += "O"
